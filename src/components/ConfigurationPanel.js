@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { TowerContext } from '../TowerProvider';
 // import { easyLevel, mediumLevel, hardLevel } from "../constants"
 import cashoutFile from '../assets/Cashout.wav';
@@ -6,9 +6,7 @@ import playFile from '../assets/Play.wav';
 
 const ConfigurationPanel = ({ setGameOver }) => {
 
-  const { level, setLevel, gameActive, setGameActive, tower, setShowModal, setTower, setDisableBackground, gameWon, setGameWon } = useContext(TowerContext)
-
-  const [stakePrize, setStakePrize] = useState(0.000001)
+  const { level, setLevel, gameActive, setGameActive, tower, setShowModal, setTower, setDisableBackground, gameWon, setGameWon, stakePrize, setStakePrize } = useContext(TowerContext)
 
   const cashoutAudio = new Audio(cashoutFile);
   const playAudio = new Audio(playFile);

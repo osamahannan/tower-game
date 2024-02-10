@@ -5,7 +5,7 @@ import { TowerContext } from "../TowerProvider"
 
 const TowerPanel = ({ gameOver, setGameOver }) => {
 
-  const { level, gameActive, setGameActive, tower, setTower, showModal, setShowModal, disableBackground, setDisableBackground, setGameWon, gameWon } = useContext(TowerContext)
+  const { level, gameActive, setGameActive, tower, setTower, showModal, setShowModal, disableBackground, setDisableBackground, setGameWon, gameWon, stakePrize } = useContext(TowerContext)
 
 
   const getInitalTower = () => {
@@ -86,7 +86,7 @@ const TowerPanel = ({ gameOver, setGameOver }) => {
         <i className="arrow arrow-left"></i>
         {showModal && (
           <div className="modal" onClick={() => setShowModal(false)}>
-            <span>+0.00000001</span>
+            <span>+{stakePrize}</span>
             <span>+$0.00</span>
             <span>x2.3230</span>
           </div>
@@ -94,7 +94,8 @@ const TowerPanel = ({ gameOver, setGameOver }) => {
         {gameWon && (
           <div className="modal" onClick={() => setGameWon(false)}>
             <span>YOU WON</span>
-            <span>+0.00000001</span>
+            <span>+{stakePrize}</span>
+            <span>+$0.00</span>
             <span>x73.33</span>
           </div>
         )}
