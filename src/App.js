@@ -1,24 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from "react"
+import TowerProvider from './TowerProvider';
+import ConfigurationPanel from './components/ConfigurationPanel';
+import TowerPanel from './components/TowerPanel';
 
 function App() {
+  const [gameOver, setGameOver] = useState(false)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TowerProvider>
+      <div className="App">
+        <div className="panel-container">
+          <ConfigurationPanel setGameOver={setGameOver} />
+          <TowerPanel gameOver={gameOver} setGameOver={setGameOver} />
+        </div>
+      </div>
+    </TowerProvider>
   );
 }
 
