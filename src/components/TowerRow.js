@@ -3,6 +3,8 @@ import skull from "../assets/skull-svgrepo-com.svg"
 import coin from "../assets/coin-svgrepo-com.svg"
 // import coin from "../assets/btc_coin.png"
 import { TowerContext } from "../TowerProvider"
+import gameOverFile from '../assets/GameOver.wav';
+import coinClickFile from '../assets/CoinClick.wav';
 
 const TowerRow = ({ item, appendTowerRow, disabled, shuffle, disableBackground, setDisableBackground, className, setGameOver }) => {
 
@@ -15,6 +17,9 @@ const TowerRow = ({ item, appendTowerRow, disabled, shuffle, disableBackground, 
     }
     return array;
   }
+
+  const gameOverAudio = new Audio(gameOverFile);
+  const coinClickAudio = new Audio(coinClickFile);
 
   const shuffledTowerRow = shuffle ? shuffleArray(item) : item;
 
@@ -35,8 +40,10 @@ const TowerRow = ({ item, appendTowerRow, disabled, shuffle, disableBackground, 
       return;
     }
     if (item.label !== "skull") {
+      coinClickAudio.play()
       appendTowerRow(updatedTower)
     } else {
+      gameOverAudio.play();
       appendTowerRow(updatedTower)
       setGameActive({
         ...activeGame,

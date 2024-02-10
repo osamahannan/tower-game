@@ -1,12 +1,18 @@
 import React, { useContext } from 'react'
 import { TowerContext } from '../TowerProvider';
 // import { easyLevel, mediumLevel, hardLevel } from "../constants"
+import cashoutFile from '../assets/Cashout.wav';
+import playFile from '../assets/Play.wav';
 
 const ConfigurationPanel = ({ setGameOver }) => {
 
   const { level, setLevel, gameActive, setGameActive, tower, setShowModal, setTower, setDisableBackground } = useContext(TowerContext)
 
+  const cashoutAudio = new Audio(cashoutFile);
+  const playAudio = new Audio(playFile);
+
   const gameActiveHandler = () => {
+    playAudio.play()
     setTower([])
     setGameActive({
       ...gameActive,
@@ -19,6 +25,7 @@ const ConfigurationPanel = ({ setGameOver }) => {
 
   const cashoutHandler = () => {
     // setTower([[...easyLevel]])
+    cashoutAudio.play()
     setShowModal(true)
     setGameOver(true)
     setGameActive({
