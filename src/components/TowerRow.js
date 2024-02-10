@@ -14,8 +14,8 @@ const TowerRow = ({ item, appendTowerRow, disabled, shuffle, disableBackground, 
 
   const shuffleArray = (array) => {
     for (let i = array?.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1)); // Generate random index from 0 to i
-      [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
   }
@@ -23,8 +23,6 @@ const TowerRow = ({ item, appendTowerRow, disabled, shuffle, disableBackground, 
   const gameOverAudio = new Audio(gameOverFile);
   const coinClickAudio = new Audio(coinClickFile);
   const cashoutAudio = new Audio(cashoutFile);
-
-  console.log("gameActive =", gameActive)
 
   const shuffledTowerRow = shuffle ? shuffleArray(item) : item;
 
@@ -45,7 +43,6 @@ const TowerRow = ({ item, appendTowerRow, disabled, shuffle, disableBackground, 
       return;
     }
     if (item.label !== "skull") {
-      console.log("tower =", tower)
       if (tower?.length === winningLength - 1) {
         cashoutAudio.play()
         setGameActive({

@@ -12,7 +12,6 @@ const ConfigurationPanel = ({ setGameOver }) => {
   const playAudio = new Audio(playFile);
 
   const gameActiveHandler = () => {
-    console.log("it clicked")
     playAudio.play()
     setGameWon(false)
     setTower([])
