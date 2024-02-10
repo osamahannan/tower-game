@@ -27,7 +27,6 @@ const ConfigurationPanel = ({ setGameOver }) => {
   }
 
   const cashoutHandler = () => {
-    // setTower([[...easyLevel]])
     cashoutAudio.play()
     setShowModal(true)
     setGameOver(true)
@@ -36,6 +35,17 @@ const ConfigurationPanel = ({ setGameOver }) => {
       active: false
     })
     setDisableBackground(false)
+  }
+
+  const handleDecrement = () => {
+    if (stakePrize / 2 >= 0.000001) {
+      setStakePrize(stakePrize / 2)
+    }
+  }
+  const handleIncrement = () => {
+    if (stakePrize * 2 <= 0.000016) {
+      setStakePrize(stakePrize * 2)
+    }
   }
 
   return (
@@ -56,16 +66,16 @@ const ConfigurationPanel = ({ setGameOver }) => {
       )}
       <div className="stake">
         <div className="min-max">
-          <span>-</span>
-          <span>MIN</span>
+          <span onClick={handleDecrement}>-</span>
+          <span onClick={() => setStakePrize(0.000001)}>MIN</span>
         </div>
         <div className="stake-input">
           <input type="number" inputMode='decimal' value={stakePrize} onChange={(e) => setStakePrize(e.target.value)} />
           <span>$0.00 STAKE</span>
         </div>
         <div className="min-max">
-          <span>+</span>
-          <span>MAX</span>
+          <span onClick={handleIncrement}>+</span>
+          <span onClick={() => setStakePrize(0.000016)}>MAX</span>
         </div>
       </div>
     </div>
