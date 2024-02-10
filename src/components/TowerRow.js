@@ -60,7 +60,7 @@ const TowerRow = ({ item, appendTowerRow, disabled, shuffle, disableBackground, 
         {shuffledTowerRow?.map((item, index) => {
           return (
             <button key={index} className={className} onClick={() => selectBoxHandler(item, index)}>
-              {(disabled && !shuffle) || !disableBackground && (
+              {((disabled && !shuffle) || !disableBackground) && (
                 <img src={item.label === "skull" ? skull : coin} alt="" />
               )}
             </button>
