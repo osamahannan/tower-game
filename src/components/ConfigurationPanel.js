@@ -6,13 +6,15 @@ import playFile from '../assets/Play.wav';
 
 const ConfigurationPanel = ({ setGameOver }) => {
 
-  const { level, setLevel, gameActive, setGameActive, tower, setShowModal, setTower, setDisableBackground } = useContext(TowerContext)
+  const { level, setLevel, gameActive, setGameActive, tower, setShowModal, setTower, setDisableBackground, gameWon, setGameWon } = useContext(TowerContext)
 
   const cashoutAudio = new Audio(cashoutFile);
   const playAudio = new Audio(playFile);
 
   const gameActiveHandler = () => {
+    console.log("it clicked")
     playAudio.play()
+    setGameWon(false)
     setTower([])
     setGameActive({
       ...gameActive,
@@ -43,10 +45,10 @@ const ConfigurationPanel = ({ setGameOver }) => {
         <button disabled={gameActive?.active} title="easy mode" onClick={() => setLevel("easy")} className={level === "easy" ? "active" : ""}>Easy</button>
       </div>
       {(tower?.length > 0 || !gameActive?.active) ? (
-        gameActive?.active ? (
+        (gameActive?.active && !gameWon) ? (
           <button className="cashout" onClick={cashoutHandler}>CASHOUT 0.00000019</button>
         ) : (
-          <button id="play-btn" disabled={gameActive?.active} className="play" onClick={gameActiveHandler}>PLAY</button>
+          <button id="play-btn" disabled={gameActive?.active && !gameWon} className="play" onClick={gameActiveHandler}>PLAY</button>
         )
       ) : (
         <button id="play-btn" disabled className="pick-tile" onClick={gameActiveHandler}>Pick A Tile</button>

@@ -16,3 +16,5 @@ export const hardLevel = [
   { label: "skull", selected: false },
   { label: "coin", selected: false }
 ]
+
+export const winningLength = 3;

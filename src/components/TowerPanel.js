@@ -1,13 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import TowerRow from './TowerRow'
 import { easyLevel, mediumLevel, hardLevel } from "../constants"
 import { TowerContext } from "../TowerProvider"
 
 const TowerPanel = ({ gameOver, setGameOver }) => {
 
-  const { level, gameActive, setGameActive, tower, setTower, showModal, setShowModal, disableBackground, setDisableBackground } = useContext(TowerContext)
+  const { level, gameActive, setGameActive, tower, setTower, showModal, setShowModal, disableBackground, setDisableBackground, setGameWon, gameWon } = useContext(TowerContext)
 
-  // const [tower, setTower] = useState([])
 
   const getInitalTower = () => {
     if (level === "easy") {
@@ -35,24 +34,28 @@ const TowerPanel = ({ gameOver, setGameOver }) => {
       <div className={gameOver ? "tower-box gameOver" : "tower-box"}>
         <div className="shadow-top"></div>
         <div className="tower-box-container">
-          <TowerRow
-            item={rowToAppend}
-            appendTowerRow={(shuffledTowerRow) => appendTowerRow(shuffledTowerRow)}
-            shuffle
-            disabled
-            disableBackground={disableBackground}
-            setDisableBackground={setDisableBackground}
-            className="box disable"
-          />
-          <TowerRow
-            item={rowToAppend}
-            appendTowerRow={(shuffledTowerRow) => appendTowerRow(shuffledTowerRow)}
-            shuffle
-            disabled
-            disableBackground={disableBackground}
-            setDisableBackground={setDisableBackground}
-            className="box disable"
-          />
+          {!gameWon && (
+            <>
+              <TowerRow
+                item={rowToAppend}
+                appendTowerRow={(shuffledTowerRow) => appendTowerRow(shuffledTowerRow)}
+                shuffle
+                disabled
+                disableBackground={disableBackground}
+                setDisableBackground={setDisableBackground}
+                className="box disable"
+              />
+              <TowerRow
+                item={rowToAppend}
+                appendTowerRow={(shuffledTowerRow) => appendTowerRow(shuffledTowerRow)}
+                shuffle
+                disabled
+                disableBackground={disableBackground}
+                setDisableBackground={setDisableBackground}
+                className="box disable"
+              />
+            </>
+          )}
           {!gameOver && (
             <TowerRow
               item={rowToAppend}
@@ -63,6 +66,8 @@ const TowerPanel = ({ gameOver, setGameOver }) => {
               setDisableBackground={setDisableBackground}
               className={gameActive?.active ? "box" : "box disable-bg-active"}
               setGameOver={setGameOver}
+              setGameWon={setGameWon}
+              gameWon={gameWon}
             />
           )}
           {tower?.length > 0 && tower?.map((item, idx) => {
@@ -72,7 +77,7 @@ const TowerPanel = ({ gameOver, setGameOver }) => {
           })}
         </div>
         <div className="shadow-bottom"></div>
-        {gameOver && !showModal && (
+        {gameOver && !showModal && !gameWon && (
           <div className="Game-over">
             <span>GAME OVER. TRY AGAIN.</span>
           </div>
@@ -84,6 +89,13 @@ const TowerPanel = ({ gameOver, setGameOver }) => {
             <span>+0.00000001</span>
             <span>+$0.00</span>
             <span>x2.3230</span>
+          </div>
+        )}
+        {gameWon && (
+          <div className="modal" onClick={() => setGameWon(false)}>
+            <span>YOU WON</span>
+            <span>+0.00000001</span>
+            <span>x73.33</span>
           </div>
         )}
       </div>

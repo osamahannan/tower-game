@@ -12,10 +12,11 @@ const TowerProvider = ({ children }) => {
   const [tower, setTower] = useState([])
   const [showModal, setShowModal] = useState(false)
   const [disableBackground, setDisableBackground] = useState(true)
+  const [gameWon, setGameWon] = useState(false)
 
   return (
     <TowerContext.Provider
-      value={{ level, setLevel, gameActive, setGameActive, tower, setTower, showModal, setShowModal, disableBackground, setDisableBackground }}
+      value={{ level, setLevel, gameActive, setGameActive, tower, setTower, showModal, setShowModal, disableBackground, setDisableBackground, gameWon, setGameWon }}
     >
       {children}
     </TowerContext.Provider>

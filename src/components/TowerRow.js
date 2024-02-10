@@ -5,10 +5,12 @@ import coin from "../assets/coin-svgrepo-com.svg"
 import { TowerContext } from "../TowerProvider"
 import gameOverFile from '../assets/GameOver.wav';
 import coinClickFile from '../assets/CoinClick.wav';
+import cashoutFile from '../assets/Cashout.wav';
+import { winningLength } from "../constants"
 
-const TowerRow = ({ item, appendTowerRow, disabled, shuffle, disableBackground, setDisableBackground, className, setGameOver }) => {
+const TowerRow = ({ item, appendTowerRow, disabled, shuffle, disableBackground, setDisableBackground, className, setGameOver, gameWon, setGameWon }) => {
 
-  const { activeGame, setGameActive } = useContext(TowerContext)
+  const { gameActive, setGameActive, tower, setShowModal } = useContext(TowerContext)
 
   const shuffleArray = (array) => {
     for (let i = array?.length - 1; i > 0; i--) {
@@ -20,6 +22,9 @@ const TowerRow = ({ item, appendTowerRow, disabled, shuffle, disableBackground, 
 
   const gameOverAudio = new Audio(gameOverFile);
   const coinClickAudio = new Audio(coinClickFile);
+  const cashoutAudio = new Audio(cashoutFile);
+
+  console.log("gameActive =", gameActive)
 
   const shuffledTowerRow = shuffle ? shuffleArray(item) : item;
 
@@ -29,7 +34,7 @@ const TowerRow = ({ item, appendTowerRow, disabled, shuffle, disableBackground, 
     const updatedTower = [...shuffledTowerRow]
     updatedTower.splice(index, 1, updatedItem)
 
-    if (disabled || activeGame?.active) {
+    if (disabled) {
       const element = document.getElementById("play-btn")
       if (element) {
         element.classList.add("play-animation")
@@ -40,13 +45,25 @@ const TowerRow = ({ item, appendTowerRow, disabled, shuffle, disableBackground, 
       return;
     }
     if (item.label !== "skull") {
-      coinClickAudio.play()
+      console.log("tower =", tower)
+      if (tower?.length === winningLength - 1) {
+        cashoutAudio.play()
+        setGameActive({
+          ...gameActive,
+          active: false
+        })
+        setDisableBackground(false)
+        setGameOver(true)
+        setGameWon(true)
+      } else {
+        coinClickAudio.play()
+      }
       appendTowerRow(updatedTower)
     } else {
       gameOverAudio.play();
       appendTowerRow(updatedTower)
       setGameActive({
-        ...activeGame,
+        ...gameActive,
         active: false
       })
       setDisableBackground(false)
