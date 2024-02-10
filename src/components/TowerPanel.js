@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import TowerRow from './TowerRow'
 import { easyLevel, mediumLevel, hardLevel } from "../constants"
 import { TowerContext } from "../TowerProvider"

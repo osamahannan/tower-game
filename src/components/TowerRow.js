@@ -8,9 +8,9 @@ import coinClickFile from '../assets/CoinClick.wav';
 import cashoutFile from '../assets/Cashout.wav';
 import { winningLength } from "../constants"
 
-const TowerRow = ({ item, appendTowerRow, disabled, shuffle, disableBackground, setDisableBackground, className, setGameOver, gameWon, setGameWon }) => {
+const TowerRow = ({ item, appendTowerRow, disabled, shuffle, disableBackground, setDisableBackground, className, setGameOver, setGameWon }) => {
 
-  const { gameActive, setGameActive, tower, setShowModal } = useContext(TowerContext)
+  const { gameActive, setGameActive, tower } = useContext(TowerContext)
 
   const shuffleArray = (array) => {
     for (let i = array?.length - 1; i > 0; i--) {
