@@ -16,7 +16,7 @@
 
 .panel-container {
   display: flex;
-  height: 80%;
+  height: 83%;
   /* border: 1px solid red; */
 }
 
@@ -191,6 +191,11 @@
   gap: 1.5rem;
 }
 
+.tower-container > h4 {
+  margin-top: 1rem;
+  color: rgb(144, 144, 144);
+}
+
 .tower-box {
   display: flex;
   position: relative;
@@ -201,6 +206,7 @@
   gap: 0.5rem;
   background-color: #202020;
   overflow: auto;
+  margin-bottom: 1rem;
 }
 
 .tower-box.gameOver {
@@ -324,7 +330,7 @@
 .arrow {
   position: absolute;
   /* top: 50%; */
-  bottom: 46.5%;
+  bottom: 45.5%;
   display: block;
   /* float: right; */
   margin-top: 0.25em;

@@ -31,7 +31,7 @@ const TowerPanel = ({ gameOver, setGameOver }) => {
 
   return (
     <div className='tower-container'>
-      <h3>MAX PAYOUT x73.33</h3>
+      <h4>MAX PAYOUT x73.33</h4>
       <div className={gameOver ? "tower-box gameOver" : "tower-box"}>
         <div className="shadow-top"></div>
         <div className="tower-box-container">
