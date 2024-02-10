@@ -166,9 +166,10 @@
 
 .stake-input > span {
   color: rgb(153, 153, 153);
+  margin-right: 11px;
 }
 
-.stake-input > input[type="text"] {
+.stake-input > input[type="number"] {
   width: calc(9ch + 17px);
   background: transparent;
   color: #fff;
@@ -178,6 +179,10 @@
   outline: none;
   margin: 0;
   padding: 0;
+}
+
+.stake-input > input[type="number"]::-webkit-inner-spin-button {
+  display: none;
 }
 
 .tower-container {
