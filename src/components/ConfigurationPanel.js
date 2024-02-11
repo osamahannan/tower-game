@@ -46,12 +46,17 @@ const ConfigurationPanel = ({ setGameOver }) => {
     }
   }
 
+  const changeLevelHandler = (levelType) => {
+    setLevel(levelType)
+    setDisableBackground(true)
+  }
+
   return (
     <div className='control-container'>
       <div className="level">
-        <button disabled={gameActive?.active} title="hard mode" onClick={() => setLevel("hard")} className={level === "hard" ? "active" : ""}>Hard</button>
-        <button disabled={gameActive?.active} title="medium mode" onClick={() => setLevel("medium")} className={level === "medium" ? "active" : ""}>Medium</button>
-        <button disabled={gameActive?.active} title="easy mode" onClick={() => setLevel("easy")} className={level === "easy" ? "active" : ""}>Easy</button>
+        <button disabled={gameActive?.active} title="hard mode" onClick={() => changeLevelHandler("hard")} className={level === "hard" ? "active" : ""}>Hard</button>
+        <button disabled={gameActive?.active} title="medium mode" onClick={() => changeLevelHandler("medium")} className={level === "medium" ? "active" : ""}>Medium</button>
+        <button disabled={gameActive?.active} title="easy mode" onClick={() => changeLevelHandler("easy")} className={level === "easy" ? "active" : ""}>Easy</button>
       </div>
       {(tower?.length > 0 || !gameActive?.active) ? (
         (gameActive?.active && !gameWon) ? (
